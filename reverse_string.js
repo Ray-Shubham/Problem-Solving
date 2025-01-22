@@ -7,5 +7,5 @@ function reverseString(str) {
 }
 
 let str = "Hello World";
-let reversedStr = reverseString(str);
-console.log(reversedStr);
+let result = reverseString(str);
+console.log(result);

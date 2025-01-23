@@ -18,6 +18,6 @@ function secondLargest(arr) {
   }
   return secondLargest;
 }
-let arr = [2, 3, 6, 5, 9, 4];
+let arr = [1, 2, 5, 3, 4, 6];
 let result = secondLargest(arr);
 console.log(result);

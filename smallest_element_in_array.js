@@ -1,5 +1,6 @@
 function smallestNumber(arr) {
   let n = arr.length;
+  // If n < 1, return "Array should have at least 1 element"
   if (n < 1) {
     return "Array should have at least 1 element";
   }

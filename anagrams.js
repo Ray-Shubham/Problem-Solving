@@ -25,8 +25,8 @@ function areAnagrams(str1, str2) {
     return true;
 }
 // Example usage:
-const str1 = "anagram";
-const str2 = "nagaram";
+const str1 = "gum";
+const str2 = "mug";
 if (areAnagrams(str1, str2)) {
     console.log("The strings are anagrams.");
 } else {

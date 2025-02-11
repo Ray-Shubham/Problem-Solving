@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Square & Cube Roots</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="num" placeholder="Enter Value" />
+      <button type="button" onclick="square()">Square</button>
+      <button type="button" onclick="cube()">Cube</button>
+      <button type="button" onclick="clrScreen()">Clear</button>
+      <p id="result"></p>
+    </form>
+
+    <script>
+      function square() {
+        let num = document.getElementById("num").value;
+        let result = num * num;
+        document.getElementById("result").innerHTML = result;
+        document.getElementById("num").value = "";
+      }
+
+      function cube() {
+        let num = document.getElementById("num").value;
+        let result = num * num * num;
+        document.getElementById("result").innerHTML = result;
+        document.getElementById("num").value = "";
+      }
+
+      function clrScreen() {
+        // document.getElementById("num").value = "";
+        document.getElementById("result").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

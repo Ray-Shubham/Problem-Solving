@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnBlur Event</title>
+</head>
+<body>
+
+    <input type="text" id="cap_name" onblur="upper()" placeholder="Enter Name in Capital Letters"><br><br>
+    <input type="text" id="small_name" onblur="upper()" placeholder="Enter Name in Small letters"><br><br>
+
+    <button type="button">Submit</button><br><br>
+
+    <form>
+    <input type="text" id="name" onblur="validateName()" placeholder="Enter Name">
+    <div id="nameError"></div><br><br>
+    <input type="email" id="email" onblur="validateEmail()" placeholder="Enter Email">
+    <div id="emailError"></div><br><br>
+    <button type="submit" value="submit">Submit</button>
+    </form>
+
+    <script>
+
+
+function upper() {
+    let x = document.querySelector("#cap_name");
+    x.value = x.value.toUpperCase();
+
+    let y = document.querySelector("#small_name");
+    y.value = y.value.toLowerCase();
+}
+
+        function validateName() {
+            let nameInput = document.querySelector("#name");
+            let nameError = document.querySelector("#nameError");
+            if(nameInput.value == "") {
+                nameError.textContent = "Name is required";
+                nameInput.style.borderColor = "red";
+            } else {
+                nameError.textContent = "";
+                nameInput.style.borderColor = "green";
+            }
+        }
+
+
+        function validateEmail() {
+            let emailInput = document.querySelector("#email");
+            let emailError = document.querySelector("#emailError");
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!regex.test(emailInput.value) || emailInput.value == "") {
+                emailError.textContent = "Email is required";
+                emailInput.style.borderColor = "red";
+            } else {
+                emailError.textContent = "";
+                emailInput.style.borderColor = "green";
+            }
+        }
+    </script>
+</body>
+</html>

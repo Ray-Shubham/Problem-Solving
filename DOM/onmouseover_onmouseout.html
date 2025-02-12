@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnMouseOver/OnMouseOut Events Example</title>
+    <style>
+      #myDiv {
+        width: 200px;
+        height: 100px;
+        background-color: lightblue;
+        padding: 20px;
+      }
+
+      #container {
+        width: 200px;
+        border: 1px solid black;
+      }
+      #hiddenContent {
+        display: none; /* Initially hidden */
+        padding: 10px;
+        background-color: lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="myDiv"
+      onmouseover="changeColor(this)"
+      onmouseout="resetColor(this)"
+    >
+      Hover over me!
+    </div>
+
+    <img
+      src="./bulb_off.png"
+      onmouseover="changeSize(this)"
+      onmouseout="resetSize(this)"
+      height="200px"
+      width="200px"
+      alt="bulb image"
+    />
+
+    <div id="container" onmouseover="showContent()" onmouseout="hideContent()">
+      Hover over me to reveal hidden content.
+      <div id="hiddenContent">This content is hidden until you hover.</div>
+    </div>
+
+    <div
+      id="parent"
+      onmouseover="console.log('mouseover parent')"
+      onmouseout="console.log('mouseout parent')"
+      onmouseenter="console.log('mouseenter parent')"
+      onmouseleave="console.log('mouseleave parent')"
+    >
+      Parent
+      <div
+        id="child"
+        onmouseover="console.log('mouseover child')"
+        onmouseout="console.log('mouseout child')"
+        onmouseenter="console.log('mouseenter child')"
+        onmouseleave="console.log('mouseleave child')"
+      >
+        Child
+      </div>
+    </div>
+
+    <script>
+      function changeSize(element) {
+        element.style.width = "250px";
+        element.style.height = "250px";
+      }
+
+      function resetSize(element) {
+        element.style.width = "200px";
+        element.style.height = "200px";
+      }
+
+      function changeColor(element) {
+        element.style.backgroundColor = "yellow";
+      }
+
+      function resetColor(element) {
+        element.style.backgroundColor = "lightblue";
+      }
+
+      function showContent() {
+        document.getElementById("hiddenContent").style.display = "block";
+      }
+
+      function hideContent() {
+        document.getElementById("hiddenContent").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

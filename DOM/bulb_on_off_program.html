@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulb On Off</title>
+  </head>
+  <body>
+    <img
+      src="./DOM/bulb_off.png"
+      id="pic1"
+      alt=""
+      height="200px"
+      width="200px"
+    />
+
+    <button type="button" onclick="changeBulb()">Turn On Light</button>
+    <button type="button" onclick="changeBulb()">Turn Off Light</button>
+
+    <script>
+      // function bulbOn() {
+      //   document.getElementById("pic1").src = "./DOM/bulb_on.png";
+      // }
+
+      // function bulbOff() {
+      //   document.getElementById("pic1").src = "./DOM/bulb_off.png";
+      // }
+
+      function changeBulb() {
+        let image = document.querySelector("#pic1");
+        if (image.src.match("bulb_on")) {
+          image.src = "./DOM/bulb_off.png";
+        } else {
+          image.src = "./DOM/bulb_on.png";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onload Onerror Event</title>
+</head>
+<body>
+    <img src="./bulb_off.png" alt="bulb_off" onload="imageLoad()" onerror="imageLoadError()">
+
+    <script>
+        function imageLoad() {
+            alert("Image loaded");
+        }
+        function imageLoadError() {
+            alert("Image not loaded yet");
+        }
+    </script>
+</body>
+</html>

@@ -7,60 +7,7 @@
 </head>
 <body>
 
-<input type="text" onblur="upper()" id="name" placeholder="Enter Text">
-<input type="text" onblur="upper()" id="sname" placeholder="Enter Text">
-<button type="button" onclick="clr()">Submit</button>
 
-
-<form>
-<input type="text" id="names" placeholder="Enter Name" onblur="nameValidate()" >
-<div id="nameError"></div> <br><br>
-<input type="email" id="email" placeholder="Enter Email" onblur="emailValidate()">
-<div id="emailError"></div><br><br>
-<button type="submit" value="submit">Submit</button>
-</form>
-
-<script>
-
-function nameValidate() {
-  let nameInput = document.querySelector("#names");
-  let nameError = document.querySelector("#nameError");
-  if(nameInput.value == "") {
-    nameError.textContent = "Name is required";
-    nameInput.style.borderColor = "red";
-  } else {
-    nameError.textContent = "";
-    nameInput.style.borderColor = "green";
-  }
-}
-
-function emailValidate() {
-  let emailInput = document.querySelector("#email");
-  let emailError = document.querySelector("#emailError");
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!regex.test(emailInput.value) || emailInput.value == "") {
-    emailError.innerHTML = "Invalid Email format";
-    emailError.style.color = "red";
-  } else {
-    emailError.innerHTML = "";
-    emailInput.style.border = "2px solid green";
-  }
-}
-
-
-  function upper() {
-    let x = document.querySelector("#name");
-    x.value = x.value.toUpperCase();
-
-    let y = document.querySelector("#sname");
-    y.value = y.value.toLowerCase();
-  }
-
-  function clr() {
-    document.getElementById("name").value = "";
-    document.getElementById("sname").value = "";
-  }
-</script>
 
 </body>
 </html>

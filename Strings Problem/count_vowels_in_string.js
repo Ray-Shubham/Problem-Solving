@@ -12,6 +12,6 @@ function countVowels(str) {
   }
   return count;
 }
-let str = "Hello";
+let str = "Hello world";
 let result = countVowels(str);
 console.log(result);

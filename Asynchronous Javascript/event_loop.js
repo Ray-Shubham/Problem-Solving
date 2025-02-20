@@ -162,14 +162,111 @@ So this how the Event loop works.
 
 // Example 3
 
+console.log("Start");
 
 setTimeout(function cbT() {
   console.log("CB SetTimeout");
 }, 5000);
 
-fetch("https://jsonplaceholder.typicode.com/todos/1")
-  .then(function cbF() {
-    console.log("CB Netflix")
-  });
+fetch("https://jsonplaceholder.typicode.com/todos/1").then(function cbF() {
+  console.log("CB Netflix");
+});
 
-  console.log("End");
+console.log("End");
+
+/*
+Explanation :  As we already knew whenever we execute the javascript code The Global Execution Context will be created and pushed inside the callstack.
+
+So it will execute the code line by line, first line which is console.log("Starts"). It basically calls the web API called console() to log inside the console.
+It first print the "Starts" in the console.
+
+Now it will move to next line which is "setTimeout(function cbT()". It basically calls the web API called setTimeout() and this gives us access to timer feature of the browser.
+It registers the callback function "function cbT()" along with some delay in Web API environment.
+
+
+Now the javascript will move to next line which is fetch() and it basically calls the web API called fetch() and this gives us access to HTTP request feature of the browser.
+It also registers the callback function "function cbF()" in Web API environment.
+
+Now we have two functions register in web API environment. function cbT() and function cbF().
+
+The function cbT() is waiting for the timer to get expire so that it can be move to the callback queue and wait for its turn to get executed.
+Similarly, the function cbF() is waiting for the HTTP request to get completed so that it can be move to the "microtask queue" and wait for its turn to get executed.
+
+
+What is Microtask Queue?
+Microtask Queue gets the callback functions coming through Promises and Mutation Observer.
+(or)
+Microtask Queue is like the Callback Queue, but Microtask Queue has higher priority. All the callback functions coming through Promises and Mutation Observer will go inside the Microtask Queue. For example, in the case of .fetch(), the callback function gets to the Microtask Queue. Promise handling always has higher priority so the JavaScript engine executes all the tasks from Microtask Queue and then moves to the Callback Queue.
+
+The microtask queue is first-in-first-out.
+
+What are microtasks used for?
+Microtasks are typically used for operations that need to be executed as soon as possible, such as promise callbacks and MutationObserver callbacks.
+The microtask queue is used to schedule these operations to be executed as soon as possible, without blocking the main thread.
+
+Now it moves to next line which is "console.log("End")" and it calls the web API called console() to log inside the console.
+It will print "End" inside the console.
+
+Let's assume a situation that we have a million lines of code in between the fetch() and console.log("End") line. It takes time to execute the code.
+
+In the meantime the fetch() function gets the data from the servers and the function cbF() will be pushed into the Microtask Queue.
+Meanwhile the timer also expires and the function cbT() will be pushed into the Callback Queue and waiting for its turn to get executed.
+
+Now that million lines of code still executing, the job of the Event Loop is to continously monitor the callstack as well as callback and microtask queue. if the callstack is empty and event loop sees that there is a function waiting to be executed in the callback queue or microtask queue, then it will move that function into the callstack and execute it.
+
+Now the million lines of code executed and it will move to next line which is console.log("End"). It calls the web API called console() to log inside the console.
+It will print "End" inside the console.
+
+Now the Global Execution context will be popped out of the callstack.
+
+The Event loop sees that call stack is empty it will check the callback queue and microtask queue and sees that there is a function waiting to be executed in the both queue, As microtask has higher priority it will move the function from microtask queue into the callstack and execute it.
+
+Now it will move to next line which is console.log("CB Netflix"). It calls the web API called console() to log inside the console.
+It will print "CB Netflix" inside the console.
+
+Now the Global Execution context will be popped out of the callstack.
+
+Now the Event loop sees that call stack is empty it will check the callback queue and sees that there is a function waiting to be executed in the callback queue, it will move the function from callback queue into the callstack and execute it.
+
+Now it will move to next line which is console.log("CB SetTimeout"). It calls the web API called console() to log inside the console.
+It will print "CB SetTimeout" inside the console.
+
+Now the Global Execution context will be popped out of the callstack.
+
+So the Output of the code will be 
+Start
+End
+CB Netflix
+CB SetTimeout
+
+
+Interview Question:
+
+What can come inside the Microtask queue?
+Answer: All the Callback functions which comes through promises and Mutation observer will go inside the Microtask Queue.
+It has higher priority than Callback Queue.
+
+What is Mutation Observer?
+Answer: Mutation Observer is a feature of the browser that allows you to observe changes to the DOM.
+
+Mutation Observer is basically keeps on checking whether there is any change/mutation in the DOM Tree or not. If there is any change in the DOM Tree it can execute a callback function.
+
+What can come inside the Callback queue?
+Answer: All the Callback functions which comes through setTimeout(), setInterval(), fetch(), XMLHttpRequest() will go inside the Callback Queue.
+
+What is Callback Queue?
+Answer: Callback Queue gets the ordinary callback functions coming from the setTimeout() API after the timer expires.
+Callback Queue has lesser priority than Microtask Queue of fetching the callback functions to Event Loop.
+Callback queue is also referred as Task Queue or Macrotask queue.
+
+
+Case 1:
+Suppose there are 3 tasks in microtask queue and 1 task in callback queue then the priority will be Microtask Queue > Callback Queue.
+First it will execute the microtask queue and then it will execute the callback queue.
+
+Case 2:
+Suppose there are few tasks in microtask queue and 1 task in callback queue.
+As the microtask queue has higher priority it will execute the microtask queue first but each task is creating a microtask in itself it goes on like that. So the task in callback queue will never get a chance to execute for a long time. So, this state is called as the "STARVATION of the task" inside the callback queue 
+
+  
+   */
